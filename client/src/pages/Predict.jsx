@@ -13,6 +13,7 @@ const Predict = () => {
         if (file) {
             const formData = new FormData();
             formData.append('file', file);
+            console.log(file);
 
             axios.post('http://127.0.0.1:5000/', formData, {
                 headers: {
@@ -39,7 +40,7 @@ const Predict = () => {
                 Select an image to upload
             </label>
             <input 
-                className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+                className="block w-96 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
                 aria-describedby="file" 
                 id="file" 
                 type="file" 
@@ -54,12 +55,19 @@ const Predict = () => {
                 SVG, PNG, JPG or GIF (MAX. 800x400px).
             </p>
             {file && (
-                <button
-                    className="mt-4 w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg transition-colors"
-                    onClick={handleClick}
-                >
-                    Predict
-                </button>
+                <div className='flex justify-center flex-col'>
+                    <img 
+                        className="mt-4 w-96 h-96 object-cover" 
+                        src={URL.createObjectURL(file)} 
+                        alt="uploaded_image"
+                    />
+                    <button
+                        className="mt-4 w-50 bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg transition-colors"
+                        onClick={handleClick}
+                    >
+                        Predict
+                    </button>
+                </div>
             )}
             {response && (
                 <div className="mt-4 w-full text-white text-center font-bold py-2 px-4 rounded-lg">
